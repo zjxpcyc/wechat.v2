@@ -4,8 +4,6 @@ import (
 	"encoding/xml"
 	"fmt"
 	"time"
-
-	"github.com/lunny/log"
 )
 
 // cdata CDATA
@@ -105,7 +103,7 @@ func (t *Client) ResponseMessageText(to, message string) ([]byte, error) {
 
 // ResponseMessageImage 回复图片消息
 func (t *Client) ResponseMessageImage(to, media string) ([]byte, error) {
-	log.Info("(被动)待反馈图片消息: ", fmt.Sprintf("%s", media))
+	logger.Info("(被动)待反馈图片消息: ", fmt.Sprintf("%s", media))
 
 	data := PassiveMessageImage{
 		ToUserName:   cdata{to},
@@ -120,7 +118,7 @@ func (t *Client) ResponseMessageImage(to, media string) ([]byte, error) {
 
 // ResponseMessageVoice 回复音频消息
 func (t *Client) ResponseMessageVoice(to, media string) ([]byte, error) {
-	log.Info("(被动)待反馈音频消息: ", fmt.Sprintf("音频ID %s", media))
+	logger.Info("(被动)待反馈音频消息: ", fmt.Sprintf("音频ID %s", media))
 
 	data := PassiveMessageVoice{
 		ToUserName:   cdata{to},
@@ -135,7 +133,7 @@ func (t *Client) ResponseMessageVoice(to, media string) ([]byte, error) {
 
 // ResponseMessageVideo 回复视频消息
 func (t *Client) ResponseMessageVideo(to, media, title, desc string) ([]byte, error) {
-	log.Info("(被动)待反馈视频消息: ", fmt.Sprintf("视频ID %s , 标题 %s , 描述 %s ", media, title, desc))
+	logger.Info("(被动)待反馈视频消息: ", fmt.Sprintf("视频ID %s , 标题 %s , 描述 %s ", media, title, desc))
 
 	data := PassiveMessageVideo{
 		ToUserName:   cdata{to},
@@ -152,7 +150,7 @@ func (t *Client) ResponseMessageVideo(to, media, title, desc string) ([]byte, er
 
 // ResponseMessageMusic 回复音乐消息
 func (t *Client) ResponseMessageMusic(to, music, title, desc string, others ...string) ([]byte, error) {
-	log.Info("(被动)待反馈音乐消息: ", fmt.Sprintf("音乐 %s , 标题 %s , 描述 %s, 其他: %v ", music, title, desc, others))
+	logger.Info("(被动)待反馈音乐消息: ", fmt.Sprintf("音乐 %s , 标题 %s , 描述 %s, 其他: %v ", music, title, desc, others))
 
 	othLen := len(others)
 	hqMusicURL := ""
@@ -182,7 +180,7 @@ func (t *Client) ResponseMessageMusic(to, music, title, desc string, others ...s
 
 // ResponseMessageNews 回复图文消息
 func (t *Client) ResponseMessageNews(to string, articles []map[string]string) ([]byte, error) {
-	log.Info("(被动)待反馈图文消息: ", fmt.Sprintf("%v", articles))
+	logger.Info("(被动)待反馈图文消息: ", fmt.Sprintf("%v", articles))
 
 	num := len(articles)
 	items := make([]ArticleItem, 0)

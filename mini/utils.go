@@ -5,7 +5,7 @@ import (
 	"errors"
 	"strconv"
 
-	"github.com/zjxpcyc/wechat.v2/utils"
+	"github.com/zjxpcyc/gen"
 )
 
 // CheckResult 校验接口返回结果
@@ -37,28 +37,28 @@ func CheckResult(res map[string]interface{}) error {
 // DecryptData 小程序解密数据
 // https://developers.weixin.qq.com/miniprogram/dev/api/signature.html
 func DecryptData(encryptedData, sessionKey, iv string) (data map[string]interface{}, err error) {
-	rawData, e := utils.Base64Decode(encryptedData)
+	rawData, e := gen.Base64Decode(encryptedData)
 	if e != nil {
 		err = e
 		logger.Error("小程序加密数据 Base64 Decode 失败", e.Error())
 		return
 	}
 
-	rawKey, e := utils.Base64Decode(sessionKey)
+	rawKey, e := gen.Base64Decode(sessionKey)
 	if e != nil {
 		err = e
 		logger.Error("小程序 session_key Base64 Decode 失败", e.Error())
 		return
 	}
 
-	rawIV, e := utils.Base64Decode(iv)
+	rawIV, e := gen.Base64Decode(iv)
 	if e != nil {
 		err = e
 		logger.Error("小程序解密数据 iv Base64 Decode 失败", e.Error())
 		return
 	}
 
-	decodeData, e := utils.AESP7Decrypt(rawData, rawKey, rawIV)
+	decodeData, e := gen.CBC7Decrypt(rawData, rawKey, rawIV)
 	if e != nil {
 		err = e
 		logger.Error("小程序解密数据失败", e.Error())

@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/lunny/log"
-	"github.com/zjxpcyc/wechat.v2/utils"
+	"github.com/zjxpcyc/gen"
 )
 
 // CheckResult 校验接口返回是否正确
@@ -47,5 +47,5 @@ func JSShareTicketSignature(url, noncestr, ticket, timestamp string) string {
 	sort.Strings(willSign)
 	str2Sign := strings.Join(willSign, "&")
 
-	return utils.Sha1(str2Sign)
+	return gen.SHA1(str2Sign)
 }

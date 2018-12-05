@@ -4,9 +4,8 @@ import (
 	"sort"
 	"strings"
 
+	"github.com/zjxpcyc/gen"
 	"github.com/zjxpcyc/tinylogger"
-
-	"github.com/zjxpcyc/wechat.v2/utils"
 )
 
 var logger tinylogger.LogService
@@ -66,7 +65,7 @@ func (t *Client) Signature(timestamp, nonce string) string {
 	strs := sort.StringSlice{token, timestamp, nonce}
 	sort.Strings(strs)
 
-	return utils.Sha1(strings.Join([]string(strs), ""))
+	return gen.SHA1(strings.Join([]string(strs), ""))
 }
 
 // getAccessToken 获取 access-token
