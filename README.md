@@ -31,12 +31,12 @@ wechat.SetLogger(log)
 wx := wechat.NewClient(certificate)
 
 // 如果 access-token 的获取是通过一个通用的中控器实现
-// 那么这里需要设置 wechat RefresAccessToken 方法
-// foo = interface AccessToken
+// 那么这里需要设置 wechat SetAccessToken 方法
+// foo = interface Scheduler
 wx.SetAccessToken(foo)
 
 // 同理, 如果 jsapi-ticket 也是这种模式
-// bar = func(accessToken string) string
+// bar = interface Scheduler
 wx.SetJSAPITicket(bar)
 ```
 

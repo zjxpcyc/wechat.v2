@@ -7,11 +7,6 @@ import (
 	"github.com/zjxpcyc/wechat.v2/utils"
 )
 
-// AccessToken is a interface which can get access-token
-type AccessToken interface {
-	String() string
-}
-
 // AT is the implementation of AccessToken
 type AT struct {
 	AppID       string
@@ -54,8 +49,8 @@ func NewAT(appid, appsecret string) *AT {
 	return at
 }
 
-// Get access-token
-func (t *AT) String() string {
+// Result returns access-token
+func (t *AT) Result() string {
 	return t.accessToken
 }
 

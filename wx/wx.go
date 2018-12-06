@@ -10,12 +10,17 @@ import (
 
 var logger tinylogger.LogService
 
+// Scheduler 定时器接口
+type Scheduler interface {
+	Result() string
+}
+
 // Client 微信公众号接口客户端
 type Client struct {
 	AppID       string
 	appsecret   string
-	accessToken AccessToken
-	jsTicket    JSAPITicket
+	accessToken Scheduler
+	jsTicket    Scheduler
 
 	/*
 	* certificate key 值如下:
@@ -42,7 +47,7 @@ func NewClient(certificate map[string]string) *Client {
 // 添加该函数的目的, 主要是为了实现可以接收第三方的 access-token 的刷新任务
 // 这样可以支持 access-token 与当前库封装分离的特性
 // 如果不设置, 那么系统会使用默认的 access-token 刷新机制
-func (t *Client) SetAccessToken(at ...AccessToken) {
+func (t *Client) SetAccessToken(at ...Scheduler) {
 	if at == nil || len(at) == 0 {
 		t.accessToken = NewAT(t.AppID, t.appsecret)
 	} else {
@@ -51,7 +56,7 @@ func (t *Client) SetAccessToken(at ...AccessToken) {
 }
 
 // SetJSAPITicket 设置刷新 jsapi-ticket 函数
-func (t *Client) SetJSAPITicket(jt ...JSAPITicket) {
+func (t *Client) SetJSAPITicket(jt ...Scheduler) {
 	if jt == nil || len(jt) == 0 {
 		t.jsTicket = NewJT(t.accessToken)
 	} else {
@@ -74,7 +79,7 @@ func (t *Client) getAccessToken() string {
 		return ""
 	}
 
-	return t.accessToken.String()
+	return t.accessToken.Result()
 }
 
 // getJSTicket 获取 jsapi-ticket
@@ -83,7 +88,7 @@ func (t *Client) getJSTicket() string {
 		return ""
 	}
 
-	return t.jsTicket.String()
+	return t.jsTicket.Result()
 }
 
 // SetLogger 设置日志记录器

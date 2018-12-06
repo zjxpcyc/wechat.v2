@@ -8,14 +8,9 @@ import (
 	"github.com/zjxpcyc/wechat.v2/utils"
 )
 
-// JSAPITicket is a interface which can get jspai-ticket
-type JSAPITicket interface {
-	String() string
-}
-
 // JT is the implementation of JSAPITicket
 type JT struct {
-	accessToken AccessToken
+	accessToken Scheduler
 	task        *utils.ScheduleTask
 	jsTicket    string
 	last        time.Time
@@ -23,7 +18,7 @@ type JT struct {
 }
 
 // NewJT returns new instance of JT
-func NewJT(at AccessToken) *JT {
+func NewJT(at Scheduler) *JT {
 	jt := &JT{
 		accessToken: at,
 	}
@@ -53,8 +48,8 @@ func NewJT(at AccessToken) *JT {
 	return jt
 }
 
-// String reutns the jsapi-ticket string
-func (t *JT) String() string {
+// Result reutns the jsapi-ticket string
+func (t *JT) Result() string {
 	return t.jsTicket
 }
 
@@ -62,7 +57,7 @@ func (t *JT) String() string {
 func (t *JT) getTicket() (string, int64, error) {
 	api := API["jssdk"]["ticket"]
 	params := url.Values{}
-	params.Set("access_token", t.accessToken.String())
+	params.Set("access_token", t.accessToken.Result())
 
 	res := make(map[string]interface{})
 	_, err := utils.Request(api, params, nil, &res)
