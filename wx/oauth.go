@@ -65,6 +65,7 @@ func (t *Client) getOauthToken(code string) (res map[string]interface{}, err err
 	params.Set("code", code)
 
 	_, err = utils.Request(api, params, nil, &res)
+
 	if err != nil {
 		logger.Error("获取 Oauth2 Access-Token 失败, ", err.Error())
 		return

@@ -6,6 +6,7 @@ import (
 
 	"github.com/zjxpcyc/gen"
 	"github.com/zjxpcyc/tinylogger"
+	"github.com/zjxpcyc/wechat.v2/utils"
 )
 
 var logger tinylogger.LogService
@@ -94,4 +95,5 @@ func (t *Client) getJSTicket() string {
 // SetLogger 设置日志记录器
 func SetLogger(l tinylogger.LogService) {
 	logger = l
+	utils.SetLogger(l)
 }

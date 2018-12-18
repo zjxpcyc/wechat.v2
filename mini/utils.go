@@ -10,8 +10,6 @@ import (
 
 // CheckResult 校验接口返回结果
 func CheckResult(res map[string]interface{}) error {
-	logger.Info("接口返回结果: ", res)
-
 	if res == nil {
 		return nil
 	}
