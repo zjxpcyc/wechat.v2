@@ -85,7 +85,7 @@ func (t *Client) getAccessToken() string {
 
 // getJSTicket 获取 jsapi-ticket
 func (t *Client) getJSTicket() string {
-	if t.jsTicket != nil {
+	if t.jsTicket == nil {
 		return ""
 	}
 
