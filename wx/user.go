@@ -3,7 +3,6 @@ package wx
 import (
 	"net/url"
 
-	"github.com/lunny/log"
 	"github.com/zjxpcyc/wechat.v2/utils"
 )
 
@@ -19,7 +18,7 @@ func (t *Client) GetUserDetail(openID string) (map[string]interface{}, error) {
 	res := make(map[string]interface{})
 	_, err := utils.Request(api, params, nil, &res)
 	if err != nil {
-		log.Error("获取用户信息(UUID) 失败, ", err.Error())
+		logger.Error("获取用户信息(UUID) 失败, ", err.Error())
 		return nil, err
 	}
 

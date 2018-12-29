@@ -6,13 +6,12 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/lunny/log"
 	"github.com/zjxpcyc/gen"
 )
 
 // CheckResult 校验接口返回是否正确
 func CheckResult(res map[string]interface{}) error {
-	log.Info("接口返回结果: ", res)
+	logger.Info("接口返回结果: ", res)
 
 	if res == nil {
 		return nil
@@ -32,7 +31,7 @@ func CheckResult(res map[string]interface{}) error {
 	}
 
 	msg, _ := errmsg.(string)
-	log.Error("接口返回错误: " + strconv.Itoa(errNum) + "-" + msg)
+	logger.Error("接口返回错误: " + strconv.Itoa(errNum) + "-" + msg)
 	return errors.New(strconv.Itoa(errNum) + "-" + msg)
 }
 

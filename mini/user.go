@@ -3,7 +3,6 @@ package mini
 import (
 	"net/url"
 
-	"github.com/lunny/log"
 	"github.com/zjxpcyc/wechat.v2/utils"
 	"github.com/zjxpcyc/wechat/core"
 )
@@ -35,7 +34,7 @@ func (t *Client) GetOpenID(code string) (res map[string]interface{}, err error) 
 func (t *Client) GetUserFromEncryptData(encryptedData, sessionKey, iv string) (map[string]interface{}, error) {
 	res, err := core.DecodeMiniData(encryptedData, iv, sessionKey)
 	if err != nil {
-		log.Error("解密小程序数据失败", err.Error())
+		logger.Error("解密小程序数据失败", err.Error())
 		return nil, err
 	}
 

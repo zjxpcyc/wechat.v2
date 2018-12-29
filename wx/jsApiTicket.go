@@ -4,7 +4,6 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/lunny/log"
 	"github.com/zjxpcyc/wechat.v2/utils"
 )
 
@@ -27,7 +26,7 @@ func NewJT(at Scheduler) *JT {
 		var reTrySec int64 = 60
 		ticket, expire, err := jt.getTicket()
 		if err != nil {
-			log.Error("获取 JS Ticket 失败", err.Error())
+			logger.Error("获取 JS Ticket 失败", err.Error())
 			expire = reTrySec
 		}
 
