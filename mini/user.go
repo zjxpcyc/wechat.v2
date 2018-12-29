@@ -4,7 +4,6 @@ import (
 	"net/url"
 
 	"github.com/zjxpcyc/wechat.v2/utils"
-	"github.com/zjxpcyc/wechat/core"
 )
 
 // GetOpenID 获取用户 OpenID
@@ -31,12 +30,12 @@ func (t *Client) GetOpenID(code string) (res map[string]interface{}, err error) 
 }
 
 // GetUserFromEncryptData 解析加密数据
-func (t *Client) GetUserFromEncryptData(encryptedData, sessionKey, iv string) (map[string]interface{}, error) {
-	res, err := core.DecodeMiniData(encryptedData, iv, sessionKey)
-	if err != nil {
-		logger.Error("解密小程序数据失败", err.Error())
-		return nil, err
-	}
+// func (t *Client) GetUserFromEncryptData(encryptedData, sessionKey, iv string) (map[string]interface{}, error) {
+// 	res, err := core.DecodeMiniData(encryptedData, iv, sessionKey)
+// 	if err != nil {
+// 		logger.Error("解密小程序数据失败", err.Error())
+// 		return nil, err
+// 	}
 
-	return res, nil
-}
+// 	return res, nil
+// }
